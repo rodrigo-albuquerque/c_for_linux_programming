@@ -1,0 +1,7 @@
+argv[0] = ./4_fprint_also_does_formatting
+argv[1] = a
+argv[2] = b
+argv[3] = c
+argv[4] = d
+argv[5] = e
+argv[6] = f
