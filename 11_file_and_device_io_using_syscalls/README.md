@@ -161,7 +161,7 @@ Inverse flips all the bits so it's the same as subtracting the value from 7. Wit
 
 >  101 101 000
 >  111 100 100  (&)
-> --------------
+>
 >  110 100 100 = 644
 
 The mask ensures we never create a file with more permissions than we want.
