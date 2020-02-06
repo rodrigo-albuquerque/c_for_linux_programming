@@ -159,9 +159,9 @@ The inverse of 0022 in binary is:
 
 Inverse flips all the bits so it's the same as subtracting the value from 7. With inverse complete, we can now do the bitwise AND of 0755 and 0644 like this:
 
-  101 101 000
-  111 100 100  (&)
---------------
-  110 100 100 = 644
+>  101 101 000
+>  111 100 100  (&)
+> --------------
+>  110 100 100 = 644
 
 The mask ensures we never create a file with more permissions than we want.
