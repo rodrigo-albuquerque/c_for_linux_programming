@@ -35,15 +35,18 @@ However, the standard way of doing it is to allow the main() function to return.
 Question is: what do we do if we want our program to termine from another part of the program other than main()?
 We need a separate way  to do that and the solution is exit call.
 
------- \_exit()
+\_exit()
+------
 
 Terminates process immediately without any additional code execution
 
-### exit()
+exit()
+------
 
 Cleanly terminates process by invoking additional code as requested by user and to manage ongoing I/O.
 
------- \_Exit()
+\_Exit()
+------
 
 Terminates process immediately. It's a wrapper to _exit()
 
