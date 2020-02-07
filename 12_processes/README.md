@@ -14,9 +14,9 @@ A process is also the core unit of the OS resource of Process Management where t
       |        +--------------+
       |
 _exit |
-      |
-      |
-      |
+      \|
+      \|
+      \|
 
 ## How does a process die?
 
