@@ -52,6 +52,15 @@ Terminates process immediately. It's a wrapper to _exit()
 
 ![Exit Process LifeCycle Image](https://www.usna.edu/Users/cs/aviv/classes/ic221/s16/lec/13/img/process_lifecycle_exit.png)
 
+The green arrows show _exit() system call that leads to the  direct termination of the process.
+Once process is terminated, kernel (scheduler more specifically) to choose which process should run next, which is why flow points towards kernel.
+However, a call to exit() (no underscore), at  any point in program excecution, starts a separate set of actions.
+These include running exit handleres and I/O procedures as seen in red diagram.
+Eventually, once exit procedures complete, exit() calls _exit() to do the final termination.
+Not picture in the diagram is _Exit(),  which has the same action as _exit().
+It's worth pointing out that exit procedure has both a system call version and a library call version.
+In general, when we program, we only use the library functions.
+
 ## How does a process get created?
 
 
