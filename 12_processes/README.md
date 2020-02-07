@@ -10,13 +10,13 @@ A process is also the core unit of the OS resource of Process Management where t
 
                +--------------+
                | user/library |
-      |<-------| functions    |
-      |        +--------------+
-      |
-_exit |
-      \|
-      \|
-      \|
+          |<-------| functions    |
+          |        +--------------+
+          |
+    _exit |
+          |
+          |
+          |
 
 ## How does a process die?
 
