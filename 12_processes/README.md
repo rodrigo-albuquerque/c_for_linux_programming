@@ -61,6 +61,38 @@ Not picture in the diagram is _Exit(),  which has the same action as _exit().
 It's worth pointing out that exit procedure has both a system call version and a library call version.
 In general, when we program, we only use the library functions.
 
+### I/O buffering and Exit Procedures
+
+C standard library does buffering to limit the number of system calls, e.g. calls to write() as they're costly.
+System calls requires entire process to be paused, saved and swapped out in favour of Kernel, which then performs an action on behalf of user.
+Once action is complete, user process is swapped back in to complete its operation.
+So buffering is one way to avoid excessive calls.
+
+An example is a printf(). Printing doesn't occur immediately. Instead, it is buffered.
+A print is only unbuffered whenever the buffer is full or when a line completes (with \n - the newline symbol).
+
+Consider this program:
+
+int main() {
+  printf("Hello World!\n");
+}
+
+Because of new line, buffer is flushed and "Hello World" is printed to terminal.
+
+Now, consider this other one:
+
+int main() {
+  printf("Hello World!");
+}
+
+There's no new line but when main() function returns it calls exit() and exit() performs the standard I/O clean up, flushing all buffered writes.
+
+When main() function returns, it returns to another function within C startup routetine which then calls exit().
+
+However, when we call _exit(), buffers are NOT cleared and process exits straightaway.
+
+Have a look at 2_exit.c, 3_underscore_exit.c and 4_fflush.c
+
 ## How does a process get created?
 
 
