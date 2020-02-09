@@ -96,6 +96,27 @@ However, when we call _exit(), buffers are NOT cleared and process exits straigh
 
 Have a look at 2_exit.c, 3_underscore_exit.c and 4_fflush.c
 
+### Exit Status
+
+Every program exits with some status which can be checked to learn information about the execution of a process.
+
+We can set exit status of a program via various exit() calls:
+
+```c
+_exit(int status);
+exit(int status);
+_Exit(int status);
+```
+Additionally, main()'s return value implicitly sets the exit status which can be one of the following:
+0: success
+1: failure
+2: error
+
 ## How does a process get created?
 
+![The birth of a Process](https://www.usna.edu/Users/cs/aviv/classes/ic221/s16/lec/13/img/process_lifecycle_exit_exec.png)
+
+
+
+![Exit Process ](https://www.usna.edu/Users/cs/aviv/classes/ic221/s16/lec/13/img/process_lifecycle_exit_exec.png)
 
