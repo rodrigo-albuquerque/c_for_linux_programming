@@ -73,17 +73,20 @@ A print is only unbuffered whenever the buffer is full or when a line completes 
 
 Consider this program:
 
+```c
 int main() {
   printf("Hello World!\n");
 }
-
+```
 Because of new line, buffer is flushed and "Hello World" is printed to terminal.
 
 Now, consider this other one:
 
+```c
 int main() {
   printf("Hello World!");
 }
+```
 
 There's no new line but when main() function returns it calls exit() and exit() performs the standard I/O clean up, flushing all buffered writes.
 
