@@ -4,21 +4,21 @@ Open files in standard C library are referred to as file streams and have the ty
 FILE * streams;
 
 We open a file using fopen() which has the following prototype:
-
+```c
 FILE * fopen(const char *path, const char *mode);
-
+```
 First argument path is a string storing file system path of the file to open, and mode describes the permission/purpose of the file.
 For example:
-
+```c
 FILE * stream = fopen("gonavy.txt", "w");
-
+```
 The above command will open a file in current directory called "gonavy.txt" with write mode.
 
 Just like pointers, file streams are dynamically allocated and must be deallocated or closed.
 Here's how we close a file stream using fclose():
-
+```c
 fclose( stream );
-
+```
 ### File Modes ###
 Modes = reading/writing/appending.
 
@@ -50,11 +50,11 @@ Upon successful completion fopen(), fdopen() and freopen() return a FILE pointer
 Otherwise, NULL is returned and errno is set to indicate the error.
 
 So we can check for NULL for errors, for example:
-
+```c
 if ( ( stream = fopen("DOESNOTEXIST.txt, "r") ) == NULL) {
   fprintf("ERROR ... \n");
 }
-
+```
 Keep in mind that an error can also occur because of insufficient permissions.
 E.g. opening a file without reading permission or trying to write a file without writing permission.
 Additionally, read/write from a file with the wrong mode can also be the cause of errors.
