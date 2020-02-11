@@ -1,9 +1,9 @@
 This is what happens when we need to allocate memory on the heap:
 
-                                        STACK           HEAP
-                                        .---.----.     .----.
-int * p = (int *) malloc(sizeof(int));  | p |  .-+---->| 10 |
-*p = 10;                                '---'----'     '----'
+                                             STACK           HEAP
+                                             .---.----.     .----.
+     int * p = (int *) malloc(sizeof(int));  | p |  .-+---->| 10 |
+     *p = 10;                                '---'----'     '----'
 
 On the left, we use malloc() to allocate enough memory to store an int, and we assign the address of that memory to the integer pointer, p.
 On the right, is the stack diagram of this allocation.
@@ -17,17 +17,17 @@ Consider what's needed to allocate an array of a given size.
 For example, how many bytes would be needed to allocate an integer array of size 5?
 There are 4-bytes for each integer, and the array holds 5 integers: 20 bytes.
 To allocate the array, we just ask malloc() to allocate 20 bytes, and cast the result to an int *, like below:
-                                           .---.----.     .----.
-int * p = (int *) malloc(5*sizeof(int));   | p |  .-+---->| 10 | p[0]
-p[0] = 10;                                 '---'----'     |----|
-p[1] = 20;                                 | 20 | p[1]
-.                                          |----|
-.                                          :    :
-.                                          .    .
-p[4] = 50;                                 :    :
-                                           |----|
-                                           | 50 | p[4]
-                                           '----'
+                                                .---.----.     .----.
+     int * p = (int *) malloc(5*sizeof(int));   | p |  .-+---->| 10 | p[0]
+     p[0] = 10;                                 '---'----'     |----|
+     p[1] = 20;                                 | 20 | p[1]
+     .                                          |----|
+     .                                          :    :
+     .                                          .    .
+     p[4] = 50;                                 :    :
+                                                |----|
+                                                | 50 | p[4]
+                                                '----'
 The result of the malloc() is 20 bytes of contiguous memory which is referenced by an integer pointer, which is the same as an array!
 We can even use the array indexing method, [], to access and assign to the array.
 
