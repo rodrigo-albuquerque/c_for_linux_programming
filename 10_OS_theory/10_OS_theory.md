@@ -27,27 +27,27 @@ System calls are defined in Unix Standard Library (unistd.h).
 -----------------
 Memory Allocation
 -----------------
-                      .________________.
-                      |   environment  |
-                      | -------------- |
-                      |      stack     |
-                      |                |
-sbrk() moves          |                |
-break point to        |                |
-allocate more         |                |
-memory                |                |
-                      |                |
-                      |                |
-   break point -----> | -------------- |
-                 ^    | new allocation | malloc() manages how
-                 |    |                | new allocations are
-                 |    |                | used by the programmer
-                 |    |                |
-   break point -----> | -------------- |
-                      |      heap      |
-                      |----------------|
-                      |     data/bss   |
-                      .________________.
+                           .________________.
+                           |   environment  |
+                           | -------------- |
+                           |      stack     |
+                           |                |
+     sbrk() moves          |                |
+     break point to        |                |
+     allocate more         |                |
+     memory                |                |
+                           |                |
+                           |                |
+        break point -----> | -------------- |
+                      ^    | new allocation | malloc() manages how
+                      |    |                | new allocations are
+                      |    |                | used by the programmer
+                      |    |                |
+        break point -----> | -------------- |
+                           |      heap      |
+                           |----------------|
+                           |     data/bss   |
+                           .________________.
 
 C memory allocation routine is about managing memory that has already been allocated.
 As processes free and allocate new memory all the time, malloc() attempts to find contiguous memory blocks to fulfill those requests.
