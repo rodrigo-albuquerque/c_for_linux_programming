@@ -114,8 +114,17 @@ Additionally, main()'s return value implicitly sets the exit status which can be
 
 ## How does a process get created?
 
+When we execute a program, main() is not really the first thing that gets started behind the scenes.
+There are start-up routines that are executed first to set up our environment.
+Only once those complete, main() is called.
+Also, when main() returns it reeturnws to those start-up routines which eventually call exit().
+The way a program loads and executes as a process is through the exec family system call, more specificallt execv() and execvp().
+
 ![The birth of a Process](https://www.usna.edu/Users/cs/aviv/classes/ic221/s16/lec/13/img/process_lifecycle_exit_exec.png)
 
+So how does a program load and execute as a process?
+
+Check out 1_exec_ls.c
 
 
 ![Exit Process ](https://www.usna.edu/Users/cs/aviv/classes/ic221/s16/lec/13/img/process_lifecycle_exit_exec.png)
