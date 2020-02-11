@@ -68,15 +68,15 @@ CPU interrupts current process, saves state and invokes kernel with trap informa
 To allocate more memory, the trap is done by sbrk() system call which invokes the kernel function sys_sbrk().
 
 
-=====================> USER SPACE <===================== | ===========> KERNEL SPACE <===========
-.--------------------.         .--------------------.    |     .-----------------------.
-| malloc() {         |    .--->| sbrk() {           |    |.--->| sys_sbrk() {          |
-| //C library        |  ./     |  //Unix Library    |   ./     |  //System Call        |
-|   sbrk() ------------/       |  trap sys_sbrk(); ----/ |     |  //adjust break point |
-| }                  |         |  return;           |    |     |                       |
-|---------------------         ---------------------|    |     |  return;              |
-|     stdlib.h       |         |     unistd.h       |    |     | }                     |
-.--------------------.         |--------------------|    |     |-----------------------|
+     =====================> USER SPACE <===================== | ===========> KERNEL SPACE <===========
+     .--------------------.         .--------------------.    |     .-----------------------.
+     | malloc() {         |    .--->| sbrk() {           |    |.--->| sys_sbrk() {          |
+     | //C library        |  ./     |  //Unix Library    |   ./     |  //System Call        |
+     |   sbrk() ------------/       |  trap sys_sbrk(); ----/ |     |  //adjust break point |
+     | }                  |         |  return;           |    |     |                       |
+     |---------------------         ---------------------|    |     |  return;              |
+     |     stdlib.h       |         |     unistd.h       |    |     | }                     |
+     .--------------------.         |--------------------|    |     |-----------------------|
                                                          |
 
 ----------------------------------------
@@ -90,18 +90,17 @@ Sections:
 
 For example, typing man malloc, we see it is in section 3 as per MALLOC(3) header and that it's part of C standard library via include statement.
 
----
+```c
 MALLOC(3)           Linux Programmer's Manual                    MALLOC(3)
 
-NAME
-       malloc, free, calloc, realloc - Allocate and free dynamic memory
+NAME       malloc, free, calloc, realloc - Allocate and free dynamic memory
 
 SYNOPSIS
        #include <stdlib.h>
 
        void *malloc(size_t size);
        void free(void *ptr);
----
+```
 
 If we look at sbrk() command by typing man sbrk it should show section 2 and include statement should show unistd.h instead.
 
