@@ -18,16 +18,16 @@ For example, how many bytes would be needed to allocate an integer array of size
 There are 4-bytes for each integer, and the array holds 5 integers: 20 bytes.
 To allocate the array, we just ask malloc() to allocate 20 bytes, and cast the result to an int *, like below:
                                                 .---.----.     .----.
-     int * p = (int *) malloc(5*sizeof(int));   | p |  .-+---->| 10 | p[0]
-     p[0] = 10;                                 '---'----'     |----|
-     p[1] = 20;                                 | 20 | p[1]
-     .                                          |----|
-     .                                          :    :
-     .                                          .    .
-     p[4] = 50;                                 :    :
-                                                |----|
-                                                | 50 | p[4]
-                                                '----'
+      int * p = (int *) malloc(5*sizeof(int));   | p |  .-+---->| 10 | p[0]
+      p[0] = 10;                                 '---'----'     |----|
+      p[1] = 20;                                 | 20 | p[1]
+      .                                          |----|
+      .                                          :    :
+      .                                          .    .
+      p[4] = 50;                                 :    :
+                                                 |----|
+                                                 | 50 | p[4]
+                                                 '----'
 The result of the malloc() is 20 bytes of contiguous memory which is referenced by an integer pointer, which is the same as an array!
 We can even use the array indexing method, [], to access and assign to the array.
 
