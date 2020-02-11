@@ -16,8 +16,9 @@ All we need is to allocate enough space to store all those integers, and malloc(
 Consider what's needed to allocate an array of a given size.
 For example, how many bytes would be needed to allocate an integer array of size 5?
 There are 4-bytes for each integer, and the array holds 5 integers: 20 bytes.
-To allocate the array, we just ask malloc() to allocate 20 bytes, and cast the result to an int *, like below:
-                                                .---.----.     .----.
+To allocate the array, we just ask malloc() to allocate 20 bytes, and cast the result to an int pointer, like below:
+
+                                                 .---.----.     .----.
       int * p = (int *) malloc(5*sizeof(int));   | p |  .-+---->| 10 | p[0]
       p[0] = 10;                                 '---'----'     |----|
       p[1] = 20;                                 | 20 | p[1]
