@@ -75,3 +75,10 @@ So after pointer manipulation we get this instead:
                 |  .--+--> NULL
                 '-----'
 And this is indeed a valid argv for executing ls and yes, I could've used argv[1] as the first argument instead.
+
+## Creating new Process
+For that, we use fork() system call which duplicates the calling process and creates a new one with a new PID.
+
+An exact copy of process, memory and open resources is produced when fork() is called.
+
+
