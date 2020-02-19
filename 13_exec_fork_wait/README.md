@@ -81,4 +81,61 @@ For that, we use fork() system call which duplicates the calling process and cre
 
 An exact copy of process, memory and open resources is produced when fork() is called.
 
+With the exception of the kernel and init process, all processes are spawned from another process.
 
+All processes have a unique PID whih is a 2-byte (short int) that is represented by pid_t typedef.
+
+By default, fork() lets parent learn child's PID (because such value is returned by fork) but child doesn't know its own PID or even parents PID.
+
+Even parent doesn't know its own PID and because of that there are 2 system  calls to help:
+
+```c
+// retrieve current PID
+pid_t getpid(void);
+
+// retrieve parent's  PID
+pit_t getppid(void);
+```
+Check out how to print current PID and PPID on 5_getpid_ppid.c
+
+There's also a wait() system call to put  processes on hold.
+
+It's used by a parent process to wait for the status of a child process to change.
+
+A status change occurs for a number of reasons, e.g. program stopped, continued or terminated.
+
+Here's the syntax:
+
+```c
+#include <sys/types.h>
+#include <sys/wait.h>
+
+pid_t wait(int *status);
+```
+Once parent calls wait(), it gets blocked until a child changes its state.
+
+Essentially, it is waiting for child to terminate.
+
+This is known as blocking funtion because it blocks and does not continue until an event is complete.
+
+wait() returns child process' PID that just terminated (or -1 of process has no children).
+
+It takes an integer pointer as argument which is the memory address it sets the termination status of child process.
+
+To learn about exit status of a program we can use macros from sys/wait.h that checks termination status and return exit status.
+
+Here's man page for 2 of them:
+
+> WIFEXITED(status)
+>        returns true if the child terminated normally, that is,
+>        by calling exit(3) or _exit(2), or by returning from main().
+>
+> WEXITSTATUS(status)
+>        returns  the  exit  status of the child.  This consists of the least significant
+>        8 bits of the status argument that the child specified in a call to exit(3) or _exit(2) or as the
+>        argument for a return statement in main().
+>        This macro should only be employed if WIFEXITED returned true.
+
+There are other checks of termination status in man page.
+
+Check out 6_get_exitstatus.c
