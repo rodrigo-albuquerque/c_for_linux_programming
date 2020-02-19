@@ -118,7 +118,7 @@ Essentially, it is waiting for child to terminate.
 
 This is known as blocking funtion because it blocks and does not continue until an event is complete.
 
-wait() returns child process' PID that just terminated (or -1 of process has no children).
+wait system call returns child process' PID that just terminated (or -1 of process has no children).
 
 It takes an integer pointer as argument which is the memory address it sets the termination status of child process.
 
@@ -139,3 +139,26 @@ Here's man page for 2 of them:
 There are other checks of termination status in man page.
 
 Check out 6_get_exitstatus.c
+
+Here's a quick note about where exactly child executes the exact copy of the program from once it's forked.
+
+Consider this code:
+
+```c
+int main(int argc, char **argv) {
+  int return_value;                                                                            /* 1 */
+  printf("Only parent process (pid = %d) prints this because it's before fork()\n",getpid());  /* 2 */
+  return_value = fork();                                                                       /* 3 */
+  printf("Both parent and child should print this");                                           /* 4 */
+  return EXIT_SUCCESS;                                                                         /* 5 */
+}
+```
+
+> Here's the execution flow:
+>
+> parent process calls fork() → ...
+>                             ↘
+> parent process               exec() → 1 → 2 → 3 → 4 → 5
+>                                                     ↘
+> child process                                         4 → 5
+
