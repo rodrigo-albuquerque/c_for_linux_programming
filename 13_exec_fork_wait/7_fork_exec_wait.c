@@ -7,6 +7,8 @@
 /*
  *  This is a program that executes another program and waits for that program to finish before it exits.
  *  To understand, where child exactly begins to execute code look at 7_child_fork_start.c
+ *  Essentially, child executes ls -l and parent is kept on hold because there's a wait() system call
+ *  Once child finishes its execution, parent resumes and prints Parent: finished message.
  */
 int main(int argc, char * argv[]) {
   // arguments for ls does 'ls -l /bin'
