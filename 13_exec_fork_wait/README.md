@@ -154,11 +154,10 @@ int main(int argc, char **argv) {
 }
 ```
 
-> Here's the execution flow:
->
-> parent process calls fork() → ...
->                             ↘
-> parent process               exec() → 1 → 2 → 3 → 4 → 5
->                                                     ↘
-> child process                                         4 → 5
+Here's the execution flow:
 
+     parent process calls fork() → ...
+                              ↘
+     parent process             exec() → 1 → 2 → 3 → 4 → 5
+                                                      ↘
+     child process                                      4 → 5
