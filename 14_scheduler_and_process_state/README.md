@@ -44,7 +44,7 @@ The other situation is when a running process is waiting for an I/O operation du
 
 We need to somehow prioritise things.
 
-## Priority Queue Scheduling
+# Priority Queue Scheduling
 
 In the real world, Linux implements a hybrid strategy that is a mix of round-robin scheduling and priority scheduling.
 
@@ -56,6 +56,6 @@ Process starvation is also handled by moving lower priority processes that haven
 
 This strategy is called multi-level queue scheduling and is very effecitive highly efficient.
 
-## Niceness of a program
+# Niceness of a program
 
 
