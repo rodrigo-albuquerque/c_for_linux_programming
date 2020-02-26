@@ -44,7 +44,7 @@ The other situation is when a running process is waiting for an I/O operation du
 
 We need to somehow prioritise things.
 
-# Priority Queue Scheduling
+# Priority Queue Scheduling
 
 In the real world, Linux implements a hybrid strategy that is a mix of round-robin scheduling and priority scheduling.
 
@@ -58,4 +58,44 @@ This strategy is called multi-level queue scheduling and is very effecitive high
 
 # Niceness of a program
 
+The nicer the process is (to other processes), the more willing it is for another process to run in its place.
 
+Therefore, nicer processes have lower priority.
+
+However, +19 = nicest (lowest priority), -20 = very mean(highest priority)
+
+Here's how we list niceness of processes on Linux:
+
+```console
+root@kube-master:~# ps axo nice,comm,pid --sort nice | head -30
+ NI COMMAND            PID
+-20 rcu_gp               3
+-20 rcu_par_gp           4
+-20 kworker/0:0H-kb      6
+-20 mm_percpu_wq         8
+-20 kworker/1:0H-kb     19
+-20 netns               21
+-20 writeback           26
+-20 crypto              30
+-20 kintegrityd         31
+-20 kblockd             32
+-20 edac-poller         33
+-20 devfreq_wq          34
+-20 kthrotld            55
+-20 ipv6_addrconf       88
+-20 kstrp               98
+-20 ata_sff            142
+-20 mpt_poll_0         144
+-20 scsi_tmf_0         146
+-20 scsi_tmf_1         148
+-20 mpt/0              149
+-20 kworker/0:1H-kb    204
+-20 scsi_tmf_2         210
+-20 kworker/u257:0-    238
+-20 kworker/1:1H-kb    240
+-20 ext4-rsv-conver    242
+-20 ttm_swap           497
+-20 kworker/u257:2-    518
+ -1 ulogd             2887
+  0 systemd              1
+  ```
