@@ -67,7 +67,7 @@ However, +19 = nicest (lowest priority), -20 = very mean(highest priority)
 Here's how we list niceness of processes on Linux:
 
 ```console
-root@kube-master:~# ps axo nice,comm,pid --sort nice | head -30
+# ps axo nice,comm,pid --sort nice | head -30
  NI COMMAND            PID
 -20 rcu_gp               3
 -20 rcu_par_gp           4
