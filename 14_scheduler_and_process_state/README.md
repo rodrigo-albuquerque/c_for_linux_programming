@@ -1,4 +1,4 @@
-## What is the scheduler?
+# What is the scheduler?
 
 It decides which process runs next on the CPU(s).
 
@@ -6,7 +6,7 @@ It ensures that all processes have a reasonable chunk of CPU time in an efficien
 
 It has to take into consideration that not all processes are ready to run, e.g. process might be waiting for I/O operation to complete.
 
-## Scheduler design principles
+# Scheduler design principles
 
 Therefore, a good scheduling algorithm should meet the following constraints:
 
@@ -14,7 +14,7 @@ Therefore, a good scheduling algorithm should meet the following constraints:
 - Turnaround time: how long does it take for process to run once it's ready to run?
 - Fairness: all tasks, of equal priority, should have same opportunity to run and no process starved for resources or unable to run.
 
-### FIFO
+## FIFO
 
 What if we let process get CPU time based on first-come-first-served strategy?
 
@@ -22,13 +22,13 @@ It passes our fairness principle but it has a terrible turnaround as processes a
 
 Imagine a situation where another process that came in first is taking a long time to run.
 
-### Deadline Scheduling
+## Deadline Scheduling
 
 What if we adopt a strategy of scheduling CPU time to processes based on how long it takes for it to run?
 
 We can't because we don't have this information in advance.
 
-### Preemptive Scheduling
+## Preemptive Scheduling
 
 This is when a process gets scheduled for some amount of time, then it's preempted before it gets to finish and another process takes over for some more time which eventually gets preempted to allo a different process to run, and so on.
 
@@ -44,7 +44,7 @@ The other situation is when a running process is waiting for an I/O operation du
 
 We need to somehow prioritise things.
 
-### Priority Queue Scheduling
+## Priority Queue Scheduling
 
 In the real world, Linux implements a hybrid strategy that is a mix of round-robin scheduling and priority scheduling.
 
@@ -56,6 +56,6 @@ Process starvation is also handled by moving lower priority processes that haven
 
 This strategy is called multi-level queue scheduling and is very effecitive highly efficient.
 
-### Niceness of a program
+## Niceness of a program
 
 
