@@ -99,3 +99,59 @@ Here's how we list niceness of processes on Linux:
  -1 ulogd             2887
   0 systemd              1
   ```
+As we might guess, processes with negative values are vital to Linux.
+For example, netns is responsible for handling network namespace execution.
+
+In the middle, we might find user-level processes (priority 0):
+```console
+# ps axo nice,comm,pid --sort nice | grep 'kthreadd ' -B1 -A 10
+  0 systemd              1
+  0 kthreadd             2
+  0 kworker/u256:0-      7
+  0 ksoftirqd/0          9
+  0 rcu_sched           10
+  0 rcu_bh              11
+  - migration/0         12
+  0 kworker/0:1-eve     13
+  0 cpuhp/0             14
+  0 cpuhp/1             15
+  - migration/1         16
+  0 ksoftirqd/1         17
+  ```
+At the bottom, we find the ones with lowest priority:
+```console
+root@kube-master:~# ps axo nice,comm,pid --sort nice | tail -3
+  0 tail             12339
+  5 ksmd                28
+ 19 khugepaged          29
+ ```
+# getpriority() and nice()
+In C, we can retrieve current process priority  by using getpriority() system call:
+```console
+#include <sys/time.h>
+#include <sys/resource.h>
+
+int getpriority(int which, int who);
+```
+which = type of priority, i.e. one of those: PRIO_PROCESS, PRIO_PGRP or PRIO_USER.
+who = depends on 'which' type, i.e. for PRIO_PROCESS, who = process ID, for PRIO_PGRP, who = process group ID and for PRIO_USER, who = user ID.
+
+Check 1_get_priority.c
+
+However, we should kep in mind that nice() returns new priority value so if we're checking errors, we must compare the output  of nice() with the value we expect.
+
+# Process States
+
+Scheduler must consider both process' priority AND if it's ready to run.
+
+The latter is where process states come in handy.
+
+Running (R): currently running or ready to run (waiting for CPU to pick it up)
+Uninterruptible sleep (D): waiting for an event (usually I/O) to complete, no signal can kill such process in this state, not even SIGKILL. There's nothing you can do. Either wait for process to exit or reboot.
+Interruptible sleep (S): just like D, it's also waiting for an event but it responds to signals.
+Zombie/Defunct (Z): when parent exits before its child, i.e. programmer didn't add wait() to code to wait for child to exit first
+Idle kernel thread (I): an Interruptible sleep for kernel threads (kthreads) processes with the difference that it doesn't contribute to load average. See this: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=80ed87c8a9ca0cad7ca66cf3bbdfb17559a66dcf
+Stopped by job control signal (T): This is when we type Ctrl+Z and send job to background by sending SIGTSTP and control is returned to shell.
+Stopped by debugger during tracing (t): name says it all.
+
+
