@@ -1,6 +1,11 @@
+# Intro
+
 Now that you understand the two different memory allocation procedures, let's zoom out and take a larger look at how memory in programs is managed more generally.
+
 Where is the stack? Where is the heap? How do they grow or shrink?
+
 To answer these questions, you first need to think of a program as a memory profile.
+
 All information about a program, including the actual binary code and variables all are within the memory layout of a program.
 When executing, the Operating System will manage that memory layout, and a snapshot of that memory and the current execution point basically defines a program.
 This allows the operating system to swap in and out programs as needed.

@@ -127,7 +127,7 @@ So how does a program load and execute as a process?
 Check out 1_exec_ls.c
 
 Executing a new program is different to creating a new one.
-Processes are created by dyplicating another process by using fork() system call.
+Processes are created by duplicating another process by using fork() system call.
 Such system call creates an exact copy of the process from which it is called from so we end up with a parent and a child process executing in parallel.
 In child process, after fork, it calls exec() which replaces code inherited from parent with a program and that's it.
 
